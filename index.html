@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>coaster wordle</title>
+    <link rel="stylesheet" href="styles.css?v=2" />
+  </head>
+  <body>
+    <main class="game-page" aria-labelledby="page-title">
+      <section class="intro">
+        <div class="brand" aria-label="coaster wordle">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>coaster wordle</span>
+        </div>
+
+        <h1 id="page-title">coaster wordle</h1>
+        <p class="lede">guess the UK rollercoaster from theme park, speed, inversions, height, and opening year</p>
+      </section>
+
+      <section class="panel game-panel">
+        <form class="guess-form" id="guess-form">
+          <label>
+            <span>rollercoaster</span>
+            <div class="autocomplete">
+              <input id="guess-input" autocomplete="off" placeholder="Start typing a UK coaster..." required />
+              <div class="suggestions" id="suggestions" hidden></div>
+            </div>
+          </label>
+          <button class="button button-light" type="submit">Guess</button>
+        </form>
+
+        <div class="status-row">
+          <p id="status">6 guesses. No tiny kiddie coasters. No mercy.</p>
+          <button class="button button-dark" id="new-game" type="button">New Coaster</button>
+        </div>
+
+        <div class="table-shell">
+          <table class="wordle-table">
+            <thead>
+              <tr>
+                <th>Coaster</th>
+                <th>Theme Park</th>
+                <th>Top Speed</th>
+                <th>Inversions</th>
+                <th>Height</th>
+                <th>Opening Year</th>
+              </tr>
+            </thead>
+            <tbody id="guess-body"></tbody>
+          </table>
+        </div>
+
+        <div class="legend">
+          <span><i class="green"></i> correct</span>
+          <span><i class="orange"></i> too low</span>
+          <span><i class="purple"></i> too high</span>
+          <span><i class="gray"></i> wrong park</span>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js?v=2"></script>
+  </body>
+</html>

@@ -1,0 +1,329 @@
+:root {
+  color-scheme: dark;
+  --bg: #030303;
+  --surface: rgba(10, 10, 11, 0.82);
+  --line: rgba(255, 255, 255, 0.12);
+  --line-strong: rgba(255, 255, 255, 0.2);
+  --text: #f5f5f0;
+  --muted: #a6a6a0;
+  --signal: #e9ff70;
+  --green: #59d980;
+  --orange: #ffae42;
+  --purple: #b57cff;
+  --gray: #363636;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  min-height: 100%;
+  background: var(--bg);
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+  background:
+    linear-gradient(115deg, rgba(233, 255, 112, 0.08), transparent 28rem),
+    linear-gradient(245deg, rgba(255, 255, 255, 0.06), transparent 34rem),
+    var(--bg);
+  color: var(--text);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body::before {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(to bottom, #000, transparent 75%);
+}
+
+.game-page {
+  position: relative;
+  z-index: 1;
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: clamp(28px, 5vw, 56px) 0 64px;
+}
+
+.intro {
+  display: grid;
+  justify-items: center;
+  padding: 32px 0 42px;
+  text-align: center;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 42px;
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 760;
+}
+
+.brand-mark {
+  width: 17px;
+  height: 17px;
+  border: 2px solid var(--text);
+  border-radius: 50%;
+  box-shadow: inset 6px 0 0 var(--signal);
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(52px, 11vw, 128px);
+  font-weight: 860;
+  line-height: 0.86;
+  letter-spacing: 0;
+}
+
+.lede {
+  max-width: 760px;
+  margin: 24px auto 0;
+  color: var(--muted);
+  font-size: clamp(18px, 2.2vw, 26px);
+  line-height: 1.22;
+}
+
+.panel {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.045), transparent 70%),
+    var(--surface);
+  padding: clamp(18px, 4vw, 30px);
+}
+
+.game-panel {
+  display: grid;
+  gap: 18px;
+}
+
+.guess-form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: end;
+}
+
+label {
+  display: grid;
+  gap: 8px;
+}
+
+label span {
+  color: var(--signal);
+  font-size: 12px;
+  font-weight: 860;
+  text-transform: uppercase;
+}
+
+input {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.035);
+  color: var(--text);
+  font: inherit;
+  font-size: 16px;
+  padding: 14px;
+}
+
+input:focus {
+  border-color: rgba(233, 255, 112, 0.58);
+}
+
+.autocomplete {
+  position: relative;
+}
+
+.suggestions {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  left: 0;
+  z-index: 10;
+  max-height: 260px;
+  overflow-y: auto;
+  border: 1px solid rgba(233, 255, 112, 0.36);
+  border-radius: 14px;
+  background: rgba(12, 12, 13, 0.98);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+  padding: 6px;
+}
+
+.suggestion {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 820;
+  padding: 10px 12px;
+  text-align: left;
+}
+
+.suggestion:hover,
+.suggestion.active {
+  background: rgba(233, 255, 112, 0.11);
+  color: var(--signal);
+}
+
+.suggestion span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.button {
+  display: inline-flex;
+  min-height: 48px;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  padding: 0 20px;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.button-light {
+  border: 1px solid #eff2d6;
+  background: #f5f7e9;
+  color: #11120e;
+}
+
+.button-dark {
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+}
+
+.status-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+#status {
+  margin: 0;
+  color: var(--muted);
+}
+
+.table-shell {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+}
+
+.wordle-table {
+  width: 100%;
+  min-width: 860px;
+  border-collapse: collapse;
+}
+
+th, td {
+  border-bottom: 1px solid var(--line);
+  padding: 12px;
+  text-align: center;
+}
+
+th {
+  color: var(--signal);
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+td {
+  height: 66px;
+  color: var(--text);
+  font-weight: 850;
+}
+
+td:first-child, th:first-child {
+  text-align: left;
+}
+
+tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.cell {
+  border-radius: 12px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
+.empty {
+  background: rgba(255, 255, 255, 0.025);
+  color: rgba(255, 255, 255, 0.18);
+}
+
+.correct { background: rgba(89, 217, 128, 0.85); color: #07100a; }
+.low { background: rgba(255, 174, 66, 0.9); color: #140b02; }
+.high { background: rgba(181, 124, 255, 0.86); color: #12051f; }
+.wrong { background: rgba(54, 54, 54, 0.96); color: #d8d8d0; }
+
+.hint {
+  display: block;
+  margin-top: 3px;
+  font-size: 11px;
+  opacity: 0.78;
+  text-transform: uppercase;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 760;
+}
+
+.legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.legend i {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.green { background: var(--green); }
+.orange { background: var(--orange); }
+.purple { background: var(--purple); }
+.gray { background: var(--gray); }
+
+@media (max-width: 720px) {
+  .game-page {
+    width: min(100% - 28px, 1180px);
+  }
+
+  .guess-form {
+    grid-template-columns: 1fr;
+  }
+}
