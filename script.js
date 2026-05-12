@@ -51,6 +51,10 @@ function hideSuggestions() {
 }
 
 function pickTarget(random = false) {
+  if (!coasters.length) {
+    revealModal.hidden = true;
+    return;
+  }
   const seed = random ? Date.now() : daySeed();
   target = coasters[seededIndex(seed, coasters.length)];
   guesses = [];
