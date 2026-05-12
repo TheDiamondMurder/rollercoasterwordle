@@ -4,6 +4,11 @@ const suggestions = document.querySelector("#suggestions");
 const guessBody = document.querySelector("#guess-body");
 const statusText = document.querySelector("#status");
 const newGameButton = document.querySelector("#new-game");
+const revealModal = document.querySelector("#reveal-modal");
+const revealKicker = document.querySelector("#reveal-kicker");
+const revealTitle = document.querySelector("#reveal-title");
+const revealStats = document.querySelector("#reveal-stats");
+const playAgainButton = document.querySelector("#play-again");
 
 let coasters = [];
 let target = null;
@@ -54,6 +59,7 @@ function pickTarget(random = false) {
   input.disabled = false;
   input.value = "";
   form.querySelector("button").disabled = false;
+  revealModal.hidden = true;
   hideSuggestions();
 }
 
@@ -156,6 +162,28 @@ function endGame(won) {
   statusText.textContent = won
     ? `Correct. It was ${target.name}.`
     : `Finished. It was ${target.name} at ${target.park}.`;
+  showReveal(won);
+}
+
+function showReveal(won) {
+  revealKicker.textContent = won ? "correct" : "answer revealed";
+  revealTitle.textContent = target.name;
+  revealStats.replaceChildren(
+    revealStat("Theme Park", target.park),
+    revealStat("Top Speed", `${target.speed} mph`),
+    revealStat("Inversions", target.inversions),
+    revealStat("Height", `${target.height} ft`),
+    revealStat("Opening Year", target.year),
+    revealStat("Guesses", `${guesses.length}/${maxGuesses}`),
+  );
+  revealModal.hidden = false;
+}
+
+function revealStat(label, value) {
+  const card = document.createElement("div");
+  card.className = "reveal-stat";
+  card.innerHTML = `<span>${label}</span><strong>${value}</strong>`;
+  return card;
 }
 
 function submitGuess(event) {
@@ -202,6 +230,7 @@ async function init() {
 
 form.addEventListener("submit", submitGuess);
 newGameButton.addEventListener("click", () => pickTarget(true));
+playAgainButton.addEventListener("click", () => pickTarget(true));
 input.addEventListener("input", renderSuggestions);
 input.addEventListener("focus", renderSuggestions);
 input.addEventListener("blur", () => setTimeout(hideSuggestions, 100));

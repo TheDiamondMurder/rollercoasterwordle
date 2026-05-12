@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>coaster wordle</title>
-    <link rel="stylesheet" href="styles.css?v=2" />
+    <link rel="stylesheet" href="styles.css?v=3" />
   </head>
   <body>
     <main class="game-page" aria-labelledby="page-title">
@@ -58,8 +58,17 @@
           <span><i class="gray"></i> wrong park</span>
         </div>
       </section>
+
+      <section class="reveal-modal" id="reveal-modal" hidden aria-live="polite">
+        <div class="reveal-card">
+          <p class="reveal-kicker" id="reveal-kicker">result</p>
+          <h2 id="reveal-title">the coaster was</h2>
+          <div class="reveal-stats" id="reveal-stats"></div>
+          <button class="button button-light" id="play-again" type="button">Play Again</button>
+        </div>
+      </section>
     </main>
 
-    <script src="script.js?v=2"></script>
+    <script src="script.js?v=3"></script>
   </body>
 </html>
